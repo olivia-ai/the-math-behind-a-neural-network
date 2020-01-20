@@ -68,6 +68,7 @@
 
 \setcounter{section}{-1}
 \section{Introduction}
+\label{sec:intro}
 
 \subsection{Application example}
 
@@ -85,12 +86,12 @@
       1 & 1 & 0 & 1 \\
       \hline
     \end{tabular}
-    \caption{Example of a set of persons with Obesity, Exercise, Smoking and Diabetic characteristics}
+    \caption{Example of a set of persons with Obesity, Exercise, Smoking and Diabetic properties. The 1 stands for true, the 0 for false.}
 \end{figure}
 
-{In the precedent figure, the 1 stands for true and the 0 for false. We can observe that in this example, a person with diabetes is inevitably obese. What if we want a program which takes only in parameter those 4 examples and can predict with different examples if a person is diabetic or not?}\\
+{We can observe that in this example, a person with diabetes is inevitably obese. What if we want a program which takes in parameter those 4 examples and can predict if a person is diabetic or not?}\\
 
-{We can model this program as an ANN with 3 input neurons which represent the Obesity, Exercise and Smoking columns and a single output neuron which represents
+{This problem can be modeled as an ANN with 3 input nodes which represent each property: the Obesity, Exercise and Smoking and a single output node which represents
 the Diabetic column.}
 
 \begin{figure}[H]
@@ -106,23 +107,15 @@ the Diabetic column.}
 \subsection{Neural network operation}
 \label{subsec:operation}
 
-{The input values will be inserted in the input neurons and the network will operate as a “function” to say if the person is diabetic or not. Each liaison between each neuron is a value called weight and
-is unique. And each neuron holds a specific value, calculated with the previous neuron values and the
-weights. The whole goal of the neural network is to find the correct weights to make the final predictions
+{Each property is represented as an input node so the network will operate as a function to say if the person is diabetic or not. The input nodes from a same layer are not link together but each node is linked to every node from the previous layer and from the next layer. Links between nodes are represented as weights and are unique to each liaison. A unique value is held in each node which is calculated with previous nodes values and weights. The whole goal of the neural network is to adjust the weights to make the final predictions
 right.}\\
 
-{To make the weights right, we will proceed in different steps. First of all, the neural network will
-compute the value of the output layer’s neurons named the prediction. Then, the network will make
-the difference between the prediction and the actual output and will adjust the weights to make the
-prediction more accurate. This process will be repeated until the success rate is convenient.}\\
-
-{After the construction of the neural network, we will be able to send values like 1, 1 and 1 (so it means that the persons is obese, does exercise and smokes) and get an answer from the neural network which tells us that the person is diabetic.}
-
-
+{To adjust the weights, we will proceed in different steps. First of all, the neural network will
+compute the output values named the prediction. Then, the network will use a function to calculate the error of accuracy and adjust the weights. This process will be repeated until the success rate is convenient.}
 
 \section{Forward propagation}
 
-{As seen in the Introduction, each neuron holds a value contained between 0 and 1, calculated with the values of the previous neurons, the weights and a bias. We are going to see how these values are calculated.}
+{As seen in the Introduction \ref{sec:intro}, each node holds a value contained between 0 and 1, and calculated with values of the previous neurons, weights and biases.}
 
 \begin{figure}[H]
     \centering
@@ -133,10 +126,10 @@ prediction more accurate. This process will be repeated until the success rate i
         \outputlayer[count=1,  text=\outputtext, title=Output layer]
         \linklayers[title=Weights $w_k$]
     \end{neuralnetwork}
-    \caption{Diagram of a neural network, the exponent represents the index of the layer and the subscript the index of the neuron then $a$ is the value held in the neuron.}
+    \caption{Diagram of a neural network, $a$ is a node's value, its exponent represents the index of the layer and its subscript the index of the neuron then.}
 \end{figure}
 
-{Let's create a notation, $z^{(l)}_1$ which is the bias added to the dot product of weights $w_k$ and values of the previous neurons $a^{(l-1)}_k$.}
+{Let $z^{(l)}_1$ be the sum of the bias and the dot product of weights $w_k$ and values of the previous neurons $a^{(l-1)}_k$.}
 
 \[{z^{(l)}_1=b^{(l)}_1+\sum_{k=1}^{n_{(l-1)}} a^{(l-1)}_k w_k}\]
 
@@ -158,7 +151,7 @@ prediction more accurate. This process will be repeated until the success rate i
 \[a^{(l)}_1=\sigma\left(z^{(l)}_1\right)\]
 \[a^{(l)}_1 \in \interval[open]{0}{1}\]
 
-{This calculus can be too visualised with matrix}
+{This calculus can be visualised with matrix too}
 
 \[a^{(l)}_1=\sigma\left(\begin{bmatrix}w_1 & w_2 & w_3\end{bmatrix}\begin{bmatrix}a^{(l-1)}_1 \\ a^{(l-1)}_2 \\ a^{(l-1)}_3\end{bmatrix}+\begin{bmatrix}b^{(l)}_1\end{bmatrix}\right)\]
 
@@ -186,7 +179,7 @@ prediction more accurate. This process will be repeated until the success rate i
 \[z^{(l)}=b+a^{(l-1)}w\]
 \[a^{(l)}=\sigma\left(z^{(l)}\right)\]
 
-{The goal is now to adjust the weights to make the prediction more accurate. Let's introduce the cost function which calculates the square difference between the prediction and the actual output $y$.}
+{The goal is now to adjust the weights to make the predictions more accurate. Let $C_1$ be the cost function/error function which is the square difference between the prediction and the actual output $y$.}
 
 \[C_1\left(a^{(l)},y\right)=\left(a^{(l)}-y\right)^2\]
 
@@ -207,7 +200,7 @@ prediction more accurate. This process will be repeated until the success rate i
         	{(x-y)^2};
         \end{axis}
     \end{tikzpicture}
-    \caption{Cost function graphical representation of the neural network, figure \ref{fig:simplenn}}
+    \caption{Graphical representation of cost function from the previous neural network, figure \ref{fig:simplenn}}
 \end{figure}
 
 \subsection{Gradient descent}
@@ -256,7 +249,7 @@ w_{21} & w_{22} & w_{23}
 b_{1} & b_{2}
 \end{bmatrix}\]
 
-{Then, let's calculate the predictions $a$, made by the neural network. We consider that we have 2 set of input examples.}
+{Then, let's calculate the predictions $a$. We consider that we have 2 set of input examples.}
 
 \[z=\begin{bmatrix}
 a^{(l-1)}_1 & \ldots \\
@@ -280,7 +273,7 @@ a^{(l-1)}_2 & \ldots \\
 a^{(l-1)}_2 & \ldots \\
 \end{bmatrix}\]
 
-{We can now add up the adjustments to make to the weights,}
+{We can now add up the adjustments to the weights}
 
 \[w=w+w_{adj}\]
 

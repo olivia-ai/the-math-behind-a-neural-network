@@ -1,0 +1,10 @@
+\contentsline {section}{\numberline {}Introduction}{2}{section.0.0}% 
+\contentsline {subsection}{\numberline {1}Application example}{2}{subsection.0.0.1}% 
+\contentsline {subsection}{\numberline {2}Neural network operation}{2}{subsection.0.0.2}% 
+\contentsline {section}{\numberline {A}Forward propagation}{3}{section.0.1}% 
+\contentsline {section}{\numberline {B}Back propagation}{4}{section.0.2}% 
+\contentsline {subsection}{\numberline {1}Cost function}{4}{subsection.0.2.1}% 
+\contentsline {subsection}{\numberline {2}Gradient descent}{4}{subsection.0.2.2}% 
+\contentsline {section}{\numberline {C}Complex example}{5}{section.0.3}% 
+\contentsline {subsection}{\numberline {1}Forward propagation}{5}{subsection.0.3.1}% 
+\contentsline {subsection}{\numberline {2}Back propagation}{6}{subsection.0.3.2}% 
