@@ -242,19 +242,22 @@ compute the output values named the prediction. Then, the network will use a fun
 {First of all we are going to create a matrix of weights and of bias}
 
 \[w=\begin{bmatrix}
-w_{11} & w_{12} & w_{13}\\
-w_{21} & w_{22} & w_{23}
+w_{11} & w_{21} \\
+w_{12} & w_{22} \\
+w_{13} & w_{23} \\
 \end{bmatrix}\]
 \[b=\begin{bmatrix}
-b_{1} & b_{2}
+b_{1} & b_{2} \\
+b_{1} & b_{2} \\
+b_{1} & b_{2} \\
 \end{bmatrix}\]
 
-{Then, let's calculate the predictions $a$. We consider that we have 2 set of input examples.}
+{Then, let's calculate the predictions $a$. We consider that we have 3 set of input examples.}
 
 \[z=\begin{bmatrix}
-a^{(l-1)}_1 & \ldots \\
-a^{(l-1)}_2 & \ldots \\
-a^{(l-1)}_2 & \ldots \\
+a^{(l-1)}_1 & a^{(l-1)}_2 & a^{(l-1)}_3 \\
+\ldots & \ldots & \ldots \\
+\ldots & \ldots & \ldots \\
 \end{bmatrix}\cdot w+b\]
 \[a=\sigma (z)\]
 
@@ -265,12 +268,13 @@ a^{(l-1)}_2 & \ldots \\
 \[e=a-\begin{bmatrix}
 a^{(l)}_1 & a^{(l)}_2 \\
 \ldots & \ldots \\
+\ldots & \ldots \\
 \end{bmatrix}\]
 \[w_{adj}=2e \cdot \sigma\prime (z)\cdot
 \begin{bmatrix}
-a^{(l-1)}_1 & \ldots \\
-a^{(l-1)}_2 & \ldots \\
-a^{(l-1)}_2 & \ldots \\
+a^{(l-1)}_1 & a^{(l-1)}_2 & a^{(l-1)}_3 \\
+\ldots & \ldots & \ldots \\
+\ldots & \ldots & \ldots \\
 \end{bmatrix}\]
 
 {We can now add up the adjustments to the weights}
