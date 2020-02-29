@@ -1,0 +1,75 @@
+\documentclass{article}
+
+\usepackage[a4paper,margin=5pt]{geometry}
+
+\usepackage[T1]{fontenc}
+\usepackage{times,multicol,graphicx}
+\usepackage{xcoffins}
+\usepackage{times,color}
+\usepackage{neuralnetwork}
+\usepackage{graphicx}
+
+\newcommand\cbox[2][.8]{{\setlength\fboxsep{0pt}\colorbox[gray]{#1}{#2}}}
+\pagestyle{empty}
+
+\definecolor{pink-olivia}{RGB}{255, 58, 175}
+
+\begin{document}
+  \NewCoffin \result
+  \NewCoffin \aaa
+  \NewCoffin \bbb
+  \NewCoffin \ccc
+  \NewCoffin \ddd
+  \NewCoffin \eee
+  \NewCoffin \fff
+  \NewCoffin \rulei
+  \NewCoffin \ruleii
+  \NewCoffin \ruleiii
+
+\SetHorizontalCoffin \result {}
+\SetHorizontalCoffin \aaa {\fontsize{52}{50}\sffamily\bfseries neural network}
+\SetHorizontalCoffin \bbb {\fontsize{52}{50}\sffamily\bfseries the math behind a}
+\SetHorizontalCoffin \ccc {\fontsize{12}{10}\sffamily 
+                      \quad the math behind an artificial neural network, used for olivia-ai.org
+                     \textbullet{} january 2020\quad\quad\quad\quad\quad\quad\quad\quad\quad}
+                     
+\SetHorizontalCoffin \ddd {}
+
+\SetVerticalCoffin \eee {250pt}{
+                    \begin{neuralnetwork}[height=10, nodespacing=25mm, layerspacing=35mm, nodesize=30pt]
+                        \inputlayer[count=3, bias=false]
+                        \hiddenlayer[count=4, bias=false]
+                        \linklayers
+                        \hiddenlayer[count=4, bias=false]
+                        \linklayers
+                        \outputlayer[count=1]
+                        \linklayers
+                    \end{neuralnetwork}
+                 }
+                
+
+\SetVerticalCoffin \fff {140pt}
+                 {\raggedright \fontsize{13}{14}\sffamily\bfseries 
+                 \includegraphics[width=4cm]{olivia-with-text.png}\\
+                      hugo lageneste\\
+                      \underline{hugo@olivia-ai.org}\\}
+
+\RotateCoffin \bbb {90}
+\RotateCoffin \ccc {270}
+
+\SetHorizontalCoffin \rulei  {\color{pink-olivia}\rule{6.5in}{1pc}}
+\SetHorizontalCoffin \ruleii {\color{pink-olivia}\rule{1pc}{23.5cm}}
+\SetHorizontalCoffin \ruleiii{\color{black}\rule{10pt}{152pt}}
+
+
+\JoinCoffins \result                \aaa 
+\JoinCoffins \result[\aaa-t,\aaa-r] \rulei   [b,r](0pt,2mm)
+\JoinCoffins \result[\aaa-b,\aaa-l] \bbb     [B,r](2pt,0pt)
+\JoinCoffins \result[\bbb-t,\bbb-r] \ruleii  [t,r](-2mm,0pt)
+\JoinCoffins \result[\aaa-B,\aaa-r] \ccc     [B,l](66pt,14pc)
+\JoinCoffins \result[\bbb-l,\ccc-B] \fff     [t,r](-2mm,0pt)
+\JoinCoffins \result[\fff-b,\fff-r] \ruleiii [b,l](2mm,0pt)
+\JoinCoffins \result[\ccc-r,\fff-l] \eee     [B,r]
+\JoinCoffins \result[\eee-T,\eee-r] \ddd     [B,r](0pt,4pc)
+\TypesetCoffin \result
+\end{document}

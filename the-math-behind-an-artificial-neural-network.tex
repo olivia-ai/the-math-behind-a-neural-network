@@ -27,36 +27,6 @@
 
 \begin{document}
 
-\begin{titlepage}
-    \center
-    
-    \newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
-    \HRule \\[0.4cm]
-    {\huge \bfseries The math behind an artificial neural network  }\\[0.1cm]
-    \HRule \\[0.4cm]
-    
-    {Hugo \textsc{Lageneste}}\\[0.5cm]
-    {\large January 2020}\\[2cm]
-    
-    \vfill
-    \begin{neuralnetwork}[height=10, nodespacing=25mm, layerspacing=35mm, nodesize=30pt]
-    	\newcommand{\inputtext}[2]{$a^{(l-3)}_#2$}
-    	\newcommand{\hiddentext}[2]{$a^{(l-2)}_#2$}
-    	\newcommand{\hiddentwotext}[2]{$a^{(l-1)}_#2$}
-        \newcommand{\outputtext}[2]{$a^{(l)}_#2$}
-        \inputlayer[count=5, bias=false, text=\inputtext]
-        \hiddenlayer[count=6, bias=false, text=\hiddentext]
-        \linklayers
-        \hiddenlayer[count=6, bias=false, text=\hiddentwotext]
-        \linklayers
-        \outputlayer[count=3, text=\outputtext]
-        \linklayers
-    \end{neuralnetwork}
-    \vfill
-    \includegraphics[width=4cm]{img/olivia-with-text}\\
-    \href{https://olivia-ai.org}{\underline{https://olivia-ai.org}}
-\end{titlepage}
-
 \begingroup
 \let\cleardoublepage\relax
 \let\clearpage\relax
@@ -234,6 +204,8 @@ prediction more accurate. This process will be repeated until the success rate i
 
 {We will use this formula to calculate the adjustments to make to the weights multiple times until the predictions are accurate.}
 
+\[w=w+\alpha \frac{\partial C_1}{\partial w}\]
+
 \section{Complex example}
 
 \begin{figure}[H]
@@ -282,42 +254,28 @@ a^{(l-2)}_1 & a^{(l-2)}_2 & a^{(l-2)}_3 \\
 \[a=\sigma (z)\]
 
 \subsection{Back propagation}
-
 {Because we have now a hidden layer, we will need to express the partial derivative of $C$ with respect to $w^{(l)}$ couched in terms of $l$.}\\
 {The adjustments will take the following form}
-
 \[w^{(l)}=w^{(l)}+\alpha \frac{\partial C}{\partial w^{(l)}}\]
-
 {Here, $\alpha$ represents the learning rate.}\\
 {Thus, we need to compute this derivative $\frac{\partial C}{\partial w^{(l)}}$.}
 {Using the chain rule,}
-
 \[\frac{\partial C}{\partial w^{(l)}}=\frac{\partial C}{\partial z^{(l)}} \frac{\partial z^{(l)}}{\partial w^{(l)}}\]
-
 {First of all let's compute $\frac{\partial z^{(l)}}{\partial w^{(l)}}$}
-
 \[\frac{\partial z^{(l)}}{\partial w^{(l)}} = \frac{\partial}{\partial w^{(l)}} \left( a^{(l-1)} w^{(l)} + b^{(l-1)} \right)=a^{(l-1)}\]
-
 {Then, we'll compute $\frac{\partial C}{\partial z^{(l)}}$ couched in terms of $z^{(l+1)}$ in order to model backpropagation in programming.}
-
 \[\frac{\partial C}{\partial z^{(l)}}=\frac{\partial C}{\partial z^{(l+1)}}\frac{\partial z^{(l+1)}}{\partial a^{(l)}}\frac{\partial a^{(l)}}{\partial z^{(l)}}\]
-
 \[\frac{\partial z^{(l+1)}}{\partial a^{(l)}}=\frac{\partial}{\partial a^{(l)}} \left(w^{(l+1)} a^{(l)} + b^{(l)}\right)=w^{(l+1)}\]
-
 \[\frac{\partial a^{(l)}}{\partial z^{(l)}}=\frac{\partial}{\partial z^{(l)}} \sigma \left(z^{(l)}\right)=\sigma\prime\left(z^{(l)}\right)\]
-
 {Thus, after adjusting the terms to make dot products working we got}
-
 \[\frac{\partial C}{\partial z^{(l)}}=\left(w^{(l+1)^{T}} \cdot \frac{\partial C}{\partial z^{(l+1)}} \right) \times \sigma\prime\left(z^{(l)}\right)\]
-
 {And,}
-
 \[\frac{\partial C}{\partial w^{(l)}}=\left(w^{(l+1)^{T}} \cdot \frac{\partial C}{\partial z^{(l+1)}} \right) \times \sigma\prime\left(z^{(l)}\right) \times a^{(l-1)}\]
-
 {As you can see here, to compute the adjustments for the weights you need the derivative of $C$ with respect to the next $z$ so we will need to calculate the derivative of $C$ with respect to $z$ for the last layer so we never run get out of the range.}
-
 {Here $L$ is the last layer}
-
-\[\frac{\partial C}{\partial z^{(L)}}=2(a^{(L)}-y) \sigma\prime\left(z^{(L)}\right)=2(a^{(L)}-y)\sigma\left(z^{(L)}\right)\left(1-\sigma\left(z^{(L)}\right)\right)=2(a^{(L)}-y)a^{(L)}\left(1-a^{(L)}\right)\]
+\[\frac{\partial C}{\partial z^{(L)}}=2(a^{(L)}-y) \sigma\prime\left(z^{(L)}\right)\]
+\[\frac{\partial C}{\partial z^{(L)}}=2(a^{(L)}-y)\sigma\left(z^{(L)}\right)\left(1-\sigma\left(z^{(L)}\right)\right)\]
+\[\frac{\partial C}{\partial z^{(L)}}=2(a^{(L)}-y)a^{(L)}\left(1-a^{(L)}\right)\]
+{Here we have all the ressources we need to build an artificial neural network.}
 
 \end{document}
