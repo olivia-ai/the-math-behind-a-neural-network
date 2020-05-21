@@ -8,6 +8,7 @@
 
 <p align="center">
   <a href="https://github.com/hugolgst/the-math-behind-an-artificial-neural-network/blob/master/full-document.pdf">PDF Document</a> —
+  <a href="https://github.com/hugolgst/the-math-behind-an-artificial-neural-network/blob/master/full-document_FR.pdf">PDF Document in French</a> —
   <a href="https://github.com/olivia-ai/olivia">Olivia</a> —
   <a href="https://github.com/hugolgst/the-math-behind-an-artificial-neural-network/blob/master/LICENSE">License</a>
 </p>
